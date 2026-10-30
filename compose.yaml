@@ -1,0 +1,32 @@
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: cinema_booking
+      MYSQL_USER: cinema
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-cinema_dev_password}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root_dev_password}
+      TZ: Asia/Tehran
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysql -h 127.0.0.1 -u\"$$MYSQL_USER\" -p\"$$MYSQL_PASSWORD\" \"$$MYSQL_DATABASE\" -e 'SELECT 1' >/dev/null 2>&1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+      start_period: 40s
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:mysql://db:3306/cinema_booking?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Tehran
+      DB_USERNAME: cinema
+      DB_PASSWORD: ${MYSQL_PASSWORD:-cinema_dev_password}
+      TZ: Asia/Tehran
+    ports:
+      - "${APP_PORT:-8082}:8080"
+    restart: on-failure
+volumes:
+  mysql_data:

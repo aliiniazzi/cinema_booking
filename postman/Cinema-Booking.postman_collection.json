@@ -1,7 +1,7 @@
 {
   "info": {
     "name": "Cinema Booking API",
-    "description": "ابتدا Get CSRF token، سپس Login و دوباره Get CSRF token را اجرا کنید. کوکی‌های Postman باید فعال باشند. برای ورود با نقش دیگر ابتدا Logout و سپس دریافت CSRF و ورود و دریافت CSRF را تکرار کنید. ابتدا Create movie را اجرا کنید تا شناسه برای ویرایش و حذف ذخیره شود. پس از خرید، شناسه بلیط ذخیره می‌شود.",
+    "description": "اول Get CSRF token رو اجرا کن، بعد وارد حساب شو و دوباره توکن بگیر. کوکی‌های Postman باید فعال باشن. برای عوض‌کردن نقش، اول Logout کن و دوباره توکن بگیر، وارد حساب بعدی شو و یک بار دیگه توکن بگیر. قبل از ویرایش یا حذف فیلم، Create movie رو اجرا کن تا شناسه‌اش ذخیره بشه. شناسه بلیط هم بعد از خرید ذخیره می‌شه.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
